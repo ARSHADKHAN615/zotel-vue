@@ -1,9 +1,7 @@
 FROM richarvey/nginx-php-fpm:3.1.6
 
-# Install Node.js and npm
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm@latest
+# Install Node.js and npm using Alpine package manager
+RUN apk add --update nodejs npm
 
 COPY . .
 
