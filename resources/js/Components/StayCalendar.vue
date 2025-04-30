@@ -1,23 +1,23 @@
 <template>
-  <div class="p-6">
+  <div class="p-6 dark:bg-gray-800 dark:text-white">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-semibold">Room Bookings</h2>
       <div class="flex gap-4">
         <button 
           @click="showNewBookingModal = true"
-          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          class="px-4 py-2 bg-blue-500 text-white dark:bg-blue-600 rounded hover:bg-blue-600"
         >
           New Booking
         </button>
         <button 
           @click="previousTwoWeeks" 
-          class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded"
+          class="px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 rounded"
         >
           Previous
         </button>
         <button 
           @click="nextTwoWeeks" 
-          class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded"
+          class="px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 rounded"
         >
           Next
         </button>

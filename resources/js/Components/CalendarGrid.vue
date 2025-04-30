@@ -2,10 +2,10 @@
   <div class="overflow-x-auto">
     <div class="grid grid-cols-[200px_repeat(14,_100px)] gap-0 min-w-full">
       <!-- Header with dates -->
-      <div class="font-bold p-3 bg-gray-100 sticky left-0 z-10 border-b border-r border-gray-200">Room</div>
+      <div class="font-bold p-3 bg-gray-100 dark:bg-gray-800 sticky left-0 z-10 border-b border-r border-gray-200">Room</div>
       <div v-for="date in dates" :key="date" 
-        class="font-bold p-3 bg-gray-100 text-sm border-b border-r border-gray-200 text-center"
-        :class="{'bg-gray-200': isToday(date)}"
+        class="font-bold p-3 bg-gray-100 dark:bg-gray-800 text-sm border-b border-r border-gray-200 text-center"
+        :class="{'bg-gray-200 dark:bg-gray-700': isToday(date)}"
       >
         <div class="font-medium">{{ formatDateHeader(date) }}</div>
         <div class="text-xs text-gray-600">{{ formatDayName(date) }}</div>
@@ -13,14 +13,14 @@
 
       <!-- Room rows -->
       <template v-for="room in rooms" :key="room.id">
-        <div class="p-3 bg-gray-50 sticky left-0 z-10 font-medium border-b border-r border-gray-200">
+        <div class="p-3 bg-gray-50 dark:bg-gray-800 sticky left-0 z-10 font-medium border-b border-r border-gray-200">
           Room {{ room.room_number }}
         </div>
         <template v-for="(date, dateIndex) in dates" :key="date">
           <div 
             class="relative h-20 border-b border-r border-gray-200 transition-colors duration-150"
             :class="{
-              'bg-gray-50': isToday(date),
+              'bg-gray-50 dark:bg-gray-800': isToday(date),
               'hover:bg-blue-50': !getBookingForDate(room.id, date)
             }"
             @dragover.prevent

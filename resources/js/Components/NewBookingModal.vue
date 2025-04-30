@@ -1,24 +1,24 @@
 <template>
     <Modal :show="show" @close="$emit('close')">
         <div class="p-6">
-            <h2 class="text-lg font-medium mb-4">New Booking</h2>
+            <h2 class="text-lg font-medium mb-4 dark:text-white">New Booking</h2>
             
             <form @submit.prevent="handleSubmit" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Guest Name</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-white">Guest Name</label>
                     <input
                         type="text"
                         v-model="form.guest_name"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="mt-1 block w-full rounded-md border-gray-300 dark:text-white dark:bg-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         required
                     />
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Room</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-white">Room</label>
                     <select
                         v-model="form.room_id"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="mt-1 block w-full rounded-md border-gray-300 dark:text-white dark:bg-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         required
                     >
                         <option value="">Select a room</option>
@@ -29,21 +29,21 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Check In</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-white">Check In</label>
                     <input
                         type="date"
                         v-model="form.check_in"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="mt-1 block w-full rounded-md border-gray-300 dark:text-white dark:bg-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         required
                     />
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Check Out</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-white">Check Out</label>
                     <input
                         type="date"
                         v-model="form.check_out"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="mt-1 block w-full rounded-md border-gray-300 dark:text-white dark:bg-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         required
                     />
                 </div>
@@ -51,7 +51,7 @@
                 <div class="flex justify-end gap-3 mt-6">
                     <button
                         type="button"
-                        class="px-4 py-2 border rounded hover:bg-gray-50"
+                        class="px-4 py-2 border rounded hover:bg-gray-50 dark:text-white dark:hover:bg-gray-700"
                         @click="$emit('close')"
                     >
                         Cancel
