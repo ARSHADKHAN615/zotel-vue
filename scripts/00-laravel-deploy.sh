@@ -2,6 +2,10 @@
 echo "Running composer"
 composer install --no-dev --working-dir=/var/www/html
 
+echo "Node install"
+npm install --prefix /var/www/html
+npm run build --prefix /var/www/html
+
 echo "Caching config..."
 php artisan config:cache
 
