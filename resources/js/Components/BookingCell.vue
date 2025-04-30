@@ -1,33 +1,32 @@
 <template>
-  <div
-    class="absolute inset-0 m-1 p-2 rounded-md shadow-sm transform transition-all duration-150 group"
-    :class="{
-      'bg-blue-100 hover:bg-blue-200': isUpcoming,
-      'bg-green-100 hover:bg-green-200': isActive,
-      'bg-gray-100 hover:bg-gray-200': isPast
-    }"
-    :style="{
-      width: `calc(${spanDays * 100}px - 2px)`,
-      zIndex: isResizing || isDragging || isHovered ? 10 : 1,
-      cursor: isResizing ? 'ew-resize' : 'move'
-    }"
-    draggable="true"
-    @dragstart="handleDragStart"
-    @click="openEditModal"
-    @mouseenter="isHovered = true"
-    @mouseleave="isHovered = false"
-  >
+  <div class="absolute inset-0 m-1 p-2 rounded-md shadow-sm transform transition-all duration-150 group" :class="{
+    'bg-blue-100 hover:bg-blue-200': isUpcoming,
+    'bg-green-100 hover:bg-green-200': isActive,
+    'bg-gray-100 hover:bg-gray-200': isPast
+  }" :style="{
+    width: `calc(${spanDays * 100}px - 2px)`,
+    zIndex: isResizing || isDragging || isHovered ? 10 : 1,
+    cursor: isResizing ? 'ew-resize' : 'move'
+  }" draggable="true" @dragstart="handleDragStart" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
+
+    <div class="absolute top-0 right-0 p-1 cursor-pointer opacity-0 group-hover:opacity-100 hover:bg-gray-300/20"
+      @click.stop="openEditModal">
+      <!--edit icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+      </svg>
+    </div> <!-- Added closing tag for the div -->
     <!-- Left resize handle -->
     <div
       class="absolute left-0 top-0 bottom-0 w-2 cursor-ew-resize opacity-0 group-hover:opacity-100 hover:bg-gray-300/20"
-      @mousedown="startResize('left', $event)"
-    ></div>
+      @mousedown="startResize('left', $event)"></div>
 
     <!-- Right resize handle -->
     <div
       class="absolute right-0 top-0 bottom-0 w-2 cursor-ew-resize opacity-0 group-hover:opacity-100 hover:bg-gray-300/20"
-      @mousedown="startResize('right', $event)"
-    ></div>
+      @mousedown="startResize('right', $event)"></div>
 
     <div class="flex flex-col h-full pointer-events-none">
       <div class="text-sm font-medium truncate">{{ booking.guest_name }}</div>
@@ -47,45 +46,34 @@
   <Modal :show="isModalOpen" @close="closeModal">
     <div class="p-6">
       <h2 class="text-lg font-medium mb-4">Edit Booking</h2>
-      
+
       <form @submit.prevent="saveChanges" class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700">Guest Name</label>
-          <input
-            type="text"
-            v-model="editForm.guest_name"
+          <input type="text" v-model="editForm.guest_name"
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-            required
-          />
+            required />
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700">Check In</label>
-          <input
-            type="date"
-            v-model="editForm.check_in"
+          <input type="date" v-model="editForm.check_in"
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-            required
-          />
+            required />
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700">Check Out</label>
-          <input
-            type="date"
-            v-model="editForm.check_out"
+          <input type="date" v-model="editForm.check_out"
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-            required
-          />
+            required />
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700">Room</label>
-          <select
-            v-model="editForm.room_id"
+          <select v-model="editForm.room_id"
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-            required
-          >
+            required>
             <option v-for="room in rooms" :key="room.id" :value="room.id">
               Room {{ room.room_number }}
             </option>
@@ -93,17 +81,10 @@
         </div>
 
         <div class="flex justify-end gap-3 mt-6">
-          <button
-            type="button"
-            class="px-4 py-2 border rounded hover:bg-gray-50"
-            @click="closeModal"
-          >
+          <button type="button" class="px-4 py-2 border rounded hover:bg-gray-50" @click="closeModal">
             Cancel
           </button>
-          <button
-            type="submit"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
+          <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Save Changes
           </button>
         </div>
@@ -184,13 +165,13 @@ const getDurationText = computed(() => {
 const startResize = (direction, event) => {
   event.preventDefault();
   event.stopPropagation();
-  
+
   isResizing.value = true;
   resizeDirection.value = direction;
   startX.value = event.clientX;
   startDate.value = new Date(direction === 'left' ? props.booking.check_in : props.booking.check_out);
   startDays.value = props.spanDays;
-  
+
   document.addEventListener('mousemove', handleResize);
   document.addEventListener('mouseup', endResize);
 };
@@ -200,7 +181,7 @@ const handleResize = (event) => {
 
   const deltaX = event.clientX - startX.value;
   const dayDelta = Math.round(deltaX / 100); // Each day cell is 100px wide
-  
+
   const newDates = calculateNewDates(dayDelta);
   if (newDates && isValidDateRange(newDates.checkIn, newDates.checkOut)) {
     // Store the pending update instead of sending it immediately
@@ -209,7 +190,7 @@ const handleResize = (event) => {
       check_in: newDates.checkIn.toISOString().split('T')[0],
       check_out: newDates.checkOut.toISOString().split('T')[0]
     };
-    
+
     // Update the visual state through the store's optimistic update
     store.updateBookingOptimistically(props.booking.id, pendingUpdate.value);
   }
@@ -218,7 +199,7 @@ const handleResize = (event) => {
 const calculateNewDates = (dayDelta) => {
   const checkIn = new Date(props.booking.check_in);
   const checkOut = new Date(props.booking.check_out);
-  
+
   if (resizeDirection.value === 'left') {
     const newCheckIn = new Date(startDate.value);
     newCheckIn.setDate(newCheckIn.getDate() + dayDelta);
@@ -247,7 +228,7 @@ const endResize = async () => {
       pendingUpdate.value = null;
     }
   }
-  
+
   isResizing.value = false;
   resizeDirection.value = null;
   document.removeEventListener('mousemove', handleResize);
@@ -299,6 +280,7 @@ onUnmounted(() => {
 .group:hover .group-hover\:opacity-100 {
   opacity: 1;
 }
+
 .absolute {
   position: absolute;
 }

@@ -73,7 +73,8 @@ const dates = computed(() => {
 const formatDateHeader = (date) => {
   return new Date(date).toLocaleDateString('en-US', {
     month: 'short',
-    day: 'numeric'
+    day: '2-digit',
+    year: 'numeric'
   });
 };
 
