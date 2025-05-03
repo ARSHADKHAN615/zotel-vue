@@ -69,4 +69,4 @@ php artisan serve
 npm run dev
 ```
 
-Visit http://localhost:8000 to access the application.
+Visit http://localhost:8000 to access your application.
